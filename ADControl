@@ -102,6 +102,21 @@ $EnableAccount.Add_Click({ EnableAccount })
 #region Logic 
 
 #Write your logic code here
+
+function ping1 {
+Describe -name "Ping test on target" {
+    Context -Name "Starting tests" -Fixture{
+    It -name "Ping test 1" -test {
+        [int](Test-Connection -ComputerName 'pclance' -Count 1 -ErrorAction SilentlyContinue)
+    
+    }
+    It -name 'Ping test 2' -test {
+    [string](Test-Connection -ComputerName 'lancepc' -Count 1 -ErrorAction SilentlyContinue)
+    
+    }}}
+}
+
+
 function SetPassword { 
     Set-ADAccountPassword -Identity $User.text -NewPassword (ConvertTo-SecureString -AsPlainText $Password.text -Force)
     [System.Windows.MessageBox]::Show('Password Changed')
